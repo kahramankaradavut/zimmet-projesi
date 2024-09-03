@@ -8,6 +8,18 @@ Bu proje, bir zimmet yönetim sistemi uygulamasıdır. Bu sistemde kullanıcıla
 - [Proje Yapısı](#proje-yapısı)
 - [API Endpointleri](#api-endpointleri)
 - [Veritabanı Tablolaru](#veritabanı-tabloları)
+  - [Units Tablosu](#units-tablosu)
+  - [Users Tablosu](#users-tablosu)
+  - [Items Tablosu](#items-tablosu)
+  - [Assignments Tablosu](#assignments-tablosu)
+  - [Categories Tablosu](#categories-tablosu)
+- [INSERT Örnekleri](insert-ornekleri)
+  - [Units Tablosuna Veri Ekleme](#units-tablosuna-insert)
+  - [Users Tablosuna Veri Ekleme](#users-tablosuna-insert)
+  - [Items Tablosuna Veri Ekleme](#items-tablosuna-insert)
+  - [Assignments Tablosuna Veri Ekleme](#assignments-tablosuna-insert)
+  - [Categories Tablosuna Veri Ekleme](#categories-tablosuna-insert)
+  
 
 ## Kurulum
 
@@ -179,6 +191,51 @@ Bu proje, bir zimmet yönetim sistemi uygulamasıdır. Bu sistemde kullanıcıla
 | id         | INT       | Birincil anahtar (PK) |
 | name    | VARCHAR       | Kategori ismi |
 | description    | TEXT       | Kategori açıklaması|
+
+
+
+## INSERT Örnekleri
+
+### 1. Units Tablosuna Veri Ekleme
+
+```sql
+INSERT INTO Units (name, description) VALUES ($1, $2) RETURNING *
+```
+
+### 2. Users Tablosuna Veri Ekleme
+
+```sql
+INSERT INTO Users (name, email) VALUES ($1, $2) RETURNING *
+```
+
+### 3. Items Tablosuna Veri Ekleme
+
+```sql
+INSERT INTO Items (name, description, unit_id, category_id, barcode, brand, model, specifications)
+VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *
+```
+
+### 4. Assignments Tablosuna Veri Ekleme
+
+```sql
+INSERT INTO Assignments (item_id, user_id, assignment_level) 
+VALUES ($1, $2, $3) RETURNING *
+```
+
+### 5. Categories Tablosuna Veri Ekleme
+
+```sql
+INSERT INTO Categories (name, description) VALUES ($1, $2) RETURNING *
+```
+
+
+
+
+
+
+
+
+
 
 
 
