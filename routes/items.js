@@ -8,4 +8,8 @@ router.get('/:id', itemsController.getItemById);
 router.put('/:id', itemsController.updateItem);
 router.delete('/:id', itemsController.deleteItem);
 
+router.get('/category/:category_id', itemsController.getItemsByCategory);
+router.get('/unit/:unit_id', itemsController.getItemsByUnit);
+router.get('/:item_id/status', itemsController.getItemAssignmentStatus);
+
 module.exports = router;

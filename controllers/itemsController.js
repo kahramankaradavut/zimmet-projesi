@@ -50,10 +50,43 @@ const deleteItem = async (req, res) => {
   }
 };
 
+const getItemsByCategory = async (req, res) => {
+  const { category_id } = req.params;
+  try {
+    const items = await Items.getItemsByCategory(category_id);
+    res.status(200).json(items);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+const getItemsByUnit = async (req, res) => {
+  const { unit_id } = req.params;
+  try {
+    const items = await Items.getItemsByUnit(unit_id);
+    res.status(200).json(items);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+const getItemAssignmentStatus = async (req, res) => {
+  const { item_id } = req.params;
+  try {
+    const status = await Items.getItemAssignmentStatus(item_id);
+    res.status(200).json(status);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
 module.exports = {
   createItem,
   getItems,
   getItemById,
   updateItem,
-  deleteItem
+  deleteItem,
+  getItemsByCategory,
+  getItemsByUnit,
+  getItemAssignmentStatus
 };

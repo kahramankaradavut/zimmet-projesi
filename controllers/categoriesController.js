@@ -50,10 +50,32 @@ const deleteCategory = async (req, res) => {
   }
 };
 
+const getAssignedItemCountByCategory = async (req, res) => {
+  const { category_id } = req.params;
+  try {
+    const count = await Categories.getAssignedItemCountByCategory(category_id);
+    res.status(200).json({ count });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+const getItemsByCategory = async (req, res) => {
+  const { category_id } = req.params;
+  try {
+    const items = await Categories.getItemsByCategory(category_id);
+    res.status(200).json(items);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
 module.exports = {
   createCategory,
   getCategories,
   getCategoryById,
   updateCategory,
-  deleteCategory
+  deleteCategory,
+  getAssignedItemCountByCategory,
+  getItemsByCategory
 };

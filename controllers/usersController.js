@@ -50,10 +50,32 @@ const deleteUser = async (req, res) => {
   }
 };
 
+const getUserDetailedAssignments = async (req, res) => {
+  const { user_id } = req.params;
+  try {
+    const assignments = await Users.getUserDetailedAssignments(user_id);
+    res.status(200).json(assignments);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+const getUsersByUnit = async (req, res) => {
+  const { unit_id } = req.params;
+  try {
+    const users = await Users.getUsersByUnit(unit_id);
+    res.status(200).json(users);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
 module.exports = {
   createUser,
   getUsers,
   getUserById,
   updateUser,
-  deleteUser
+  deleteUser,
+  getUserDetailedAssignments,
+  getUsersByUnit
 };

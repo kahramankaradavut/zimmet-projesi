@@ -30,7 +30,32 @@ const Units = {
   delete: async (id) => {
     await pool.query('DELETE FROM Units WHERE id = $1', [id]);
     return true;
+  },
+
+  //Bir birimde bulunan ürünlerin sayısı
+  getItemCountByUnit: async (unit_id) => {
+    const result = await pool.query(
+      `SELECT COUNT(*) AS item_count 
+       FROM Items 
+       WHERE unit_id = $1`,
+      [unit_id]
+    );
+    return result.rows[0].item_count;
+  },
+
+  //Bir birimde çalışan kullanıcıların sayısı
+  getUserCountByUnit: async (unit_id) => {
+    const result = await pool.query(
+      `SELECT COUNT(DISTINCT Users.id) AS user_count
+       FROM Users
+       JOIN Assignments ON Users.id = Assignments.user_id
+       JOIN Items ON Assignments.item_id = Items.id
+       WHERE Items.unit_id = $1`,
+      [unit_id]
+    );
+    return result.rows[0].user_count;
   }
+  
 };
 
 module.exports = Units;

@@ -32,6 +32,44 @@ const Items = {
   delete: async (id) => {
     await pool.query('DELETE FROM Items WHERE id = $1', [id]);
     return true;
+  },
+
+  //Belirli bir kategoriye ait ürünlerin detaylı listesi
+  getItemsByCategory: async (category_id) => {
+    const result = await pool.query(
+      `SELECT Items.id, Items.name, Items.description, Units.name AS unit_name, COUNT(Assignments.id) AS assignment_count
+       FROM Items
+       LEFT JOIN Units ON Items.unit_id = Units.id
+       LEFT JOIN Assignments ON Items.id = Assignments.item_id AND Assignments.status = true
+       WHERE Items.category_id = $1
+       GROUP BY Items.id, Units.name`,
+      [category_id]
+    );
+    return result.rows;
+  },
+
+  //Belirli bir birimde bulunan ürünlerin listesi
+  getItemsByUnit: async (unit_id) => {
+    const result = await pool.query(
+      `SELECT Items.id, Items.name, Items.description, Categories.name AS category_name 
+       FROM Items
+       LEFT JOIN Categories ON Items.category_id = Categories.id
+       WHERE Items.unit_id = $1`,
+      [unit_id]
+    );
+    return result.rows;
+  },
+
+  //Bir ürünün zimmet durumu
+  getItemAssignmentStatus: async (item_id) => {
+    const result = await pool.query(
+      `SELECT Assignments.status, Assignments.assignment_level, Users.name AS user_name 
+       FROM Assignments
+       JOIN Users ON Assignments.user_id = Users.id
+       WHERE Assignments.item_id = $1`,
+      [item_id]
+    );
+    return result.rows;
   }
 };
 

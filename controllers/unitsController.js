@@ -50,10 +50,32 @@ const deleteUnit = async (req, res) => {
   }
 };
 
+const getItemCountByUnit = async (req, res) => {
+  const { unit_id } = req.params;
+  try {
+    const count = await Units.getItemCountByUnit(unit_id);
+    res.status(200).json({ count });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+const getUserCountByUnit = async (req, res) => {
+  const { unit_id } = req.params;
+  try {
+    const count = await Units.getUserCountByUnit(unit_id);
+    res.status(200).json({ count });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
 module.exports = {
   createUnit,
   getUnits,
   getUnitById,
   updateUnit,
-  deleteUnit
+  deleteUnit,
+  getItemCountByUnit,
+  getUserCountByUnit
 };
