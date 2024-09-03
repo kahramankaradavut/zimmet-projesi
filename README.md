@@ -8,17 +8,7 @@ Bu proje, bir zimmet yönetim sistemi uygulamasıdır. Bu sistemde kullanıcıla
 - [Proje Yapısı](#proje-yapısı)
 - [API Endpointleri](#api-endpointleri)
 - [Veritabanı Tabloları](#veritabanı-tabloları)
-  - [Units Tablosu](#units-tablosu)
-  - [Users Tablosu](#users-tablosu)
-  - [Items Tablosu](#items-tablosu)
-  - [Assignments Tablosu](#assignments-tablosu)
-  - [Categories Tablosu](#categories-tablosu)
 - [INSERT Örnekleri](#insert-örnekleri)
-  - [Units Tablosuna Veri Ekleme](#units-tablosuna-veri-ekleme)
-  - [Users Tablosuna Veri Ekleme](#users-tablosuna-veri-ekleme)
-  - [Items Tablosuna Veri Ekleme](#items-tablosuna-veri-ekleme)
-  - [Assignments Tablosuna Veri Ekleme](#assignments-tablosuna-veri-ekleme)
-  - [Categories Tablosuna Veri Ekleme](#categories-tablosuna-veri-ekleme)
 
   
 
